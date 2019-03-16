@@ -10,11 +10,13 @@ npm install cookies-ts --save
 
 ```ts
 import Cookies from "cookies-ts"
+
+const cookies = new Cookies()
 ```
 
 ## Api
 
-syntax format: **Cookies.[method]**
+syntax format: **cookies.[method]**
 
 ### config
 
@@ -25,7 +27,7 @@ Set global config
 
 //example
 
-Cookies.config({
+cookies.config({
     expires?: string | number | Date,
     path?: string,
 })  // default: expireTimes = 1d , path=/
@@ -36,11 +38,11 @@ Cookies.config({
 Set a cookie
 
 ```ts
-(key: string, value: any, option: CookiesOption) => VueCookies
+(key: string, value: any, option: CookiesOption) => Cookies
 
 //example
 
-Cookies.set(keyName: string, {
+cookies.set(keyName: string, {
     expires?: string | number | Date,
     path?: string,
     domain?: string,
@@ -57,7 +59,7 @@ Get a cookie
 
 //example
 
-Cookies.get(keyName: string)
+cookies.get(keyName: string)
 ```
 
 ### remove
@@ -65,11 +67,11 @@ Cookies.get(keyName: string)
 Remove a cookie
 
 ```ts
-(key: string, option: CookiesOption) => VueCookies | boolean
+(key: string, option: CookiesOption) => Cookies | boolean
 
 //example
 
-Cookies.remove(keyName: string, {path: string, domain: string})
+cookies.remove(keyName: string, {path: string, domain: string})
 ```
 
 ### isKey
@@ -81,7 +83,7 @@ If exist a `cookie name`
 
 //example
 
-Cookies.isKey(keyName: string)
+cookies.isKey(keyName: string)
 ```
 
 ### keys
@@ -93,7 +95,7 @@ Get All `cookie name`
 
 //example
 
-Cookies.keys()
+cookies.keys()
 ```
 
 ## Example Usage
@@ -102,12 +104,12 @@ Cookies.keys()
 
 ```js
 // 30 day after, expire
-Cookies.config({ expires: "30d" })
+cookies.config({ expires: "30d" })
 
-Cookies.config({ expires: new Date(2019,03,13).toUTCString() })
+cookies.config({ expires: new Date(2019,03,13).toUTCString() })
 
 // 30 day after, expire, '' current path , browser default
-Cookies.config({ expires: 60 * 60 * 24 * 30, path: "" })
+cookies.config({ expires: 60 * 60 * 24 * 30, path: "" })
 ```
 
 #### Support json object
@@ -115,10 +117,10 @@ Cookies.config({ expires: 60 * 60 * 24 * 30, path: "" })
 ```js
 var user = { id:1, name:'Journal', session:'25j_7Sl6xDq2Kc3ym0fmrSSk2xV2XkUkX' }
 
-Cookies.set('user', user)
+cookies.set('user', user)
 
 // print user name
-console.log(Cookies.get('user').name)
+console.log(cookies.get('user').name)
 ```
 
 #### Set expire times
@@ -148,23 +150,23 @@ Cookies
 
 ```js
 // 1 second after, expire
-Cookies.set("default_unit_second", "input_value", { expires: 1 })
+cookies.set("default_unit_second", "input_value", { expires: 1 })
 
 // 1 minute 30 second after, expire
-Cookies.set("default_unit_second", "input_value", { expires: 60 + 30 })
+cookies.set("default_unit_second", "input_value", { expires: 60 + 30 })
 
 // 12 hour after, expire
-Cookies.set("default_unit_second", "input_value", { expires: 60 * 60 * 12 })
+cookies.set("default_unit_second", "input_value", { expires: 60 * 60 * 12 })
 
 // 1 month after, expire
-Cookies.set("default_unit_second", "input_value", { expires: 60 * 60 * 24 * 30 })
+cookies.set("default_unit_second", "input_value", { expires: 60 * 60 * 24 * 30 })
 ```
 
 #### Set expire times - end of browser session
 
 ```js
 // end of session - use string!
-Cookies.set("default_unit_second", "input_value", { expires: "0" })
+cookies.set("default_unit_second", "input_value", { expires: "0" })
 ```
 
 #### Set expire times , input string type
@@ -186,27 +188,27 @@ Cookies.set("default_unit_second", "input_value", { expires: "0" })
 
 ```js
 // 60 second after, expire
-Cookies.set("token","GH1.1.1689020474.1484362313", { expires: "60s" })
+cookies.set("token","GH1.1.1689020474.1484362313", { expires: "60s" })
 
 // 30 minute after, expire, ignore case
-Cookies.set("token","GH1.1.1689020474.1484362313", { expires: "30min" })
+cookies.set("token","GH1.1.1689020474.1484362313", { expires: "30min" })
 
 // 24 day after, expire
-Cookies.set("token","GH1.1.1689020474.1484362313", { expires: "24d" })
+cookies.set("token","GH1.1.1689020474.1484362313", { expires: "24d" })
 
 // 4 month after, expire
-Cookies.set("token","GH1.1.1689020474.1484362313", { expires: "4m" })
+cookies.set("token","GH1.1.1689020474.1484362313", { expires: "4m" })
 
 // 16 hour after, expire
-Cookies.set("token","GH1.1.1689020474.1484362313", { expires: "16h" })
+cookies.set("token","GH1.1.1689020474.1484362313", { expires: "16h" })
 
 // 3 year after, expire
-Cookies.set("token","GH1.1.1689020474.1484362313", { expires: "3y" })
+cookies.set("token","GH1.1.1689020474.1484362313", { expires: "3y" })
 
 // input date string 
-Cookies.set('token',"GH1.1.1689020474.1484362313", { expires: new Date(2017,03,13).toUTCString() })
+cookies.set('token',"GH1.1.1689020474.1484362313", { expires: new Date(2017,03,13).toUTCString() })
 
-Cookies.set("token","GH1.1.1689020474.1484362313", { expires: "Sat, 13 Mar 2017 12:25:57 GMT " })
+cookies.set("token","GH1.1.1689020474.1484362313", { expires: "Sat, 13 Mar 2017 12:25:57 GMT " })
 ```
 
 #### Set expire support date
@@ -216,46 +218,46 @@ var date = new Date
 
 date.setDate(date.getDate() + 1)
 
-Cookies.set("token","GH1.1.1689020474.1484362313", { expires: date })
+cookies.set("token","GH1.1.1689020474.1484362313", { expires: date })
 ```
 
 #### Set never expire
 
 ```js
 // never expire
-Cookies.set("token","GH1.1.1689020474.1484362313", { expires: Infinity })
+cookies.set("token","GH1.1.1689020474.1484362313", { expires: Infinity })
 
 // never expire , only -1,Other negative Numbers are invalid
-Cookies.set("token","GH1.1.1689020474.1484362313", { expires: -1 }) 
+cookies.set("token","GH1.1.1689020474.1484362313", { expires: -1 }) 
 ```
 
 #### Set other arguments
 
 ```js
 // set path
-Cookies.set("use_path_argument","value", { expires: "1d", path: "/app" })
+cookies.set("use_path_argument","value", { expires: "1d", path: "/app" })
 
 // set domain, default 1 day after,expire
-Cookies.set("use_path_argument","value", { domain: "domain.com" })
+cookies.set("use_path_argument","value", { domain: "domain.com" })
 
 // set secure
-Cookies.set("use_path_argument","value", { secure: true })
+cookies.set("use_path_argument","value", { secure: true })
 ```
 
 #### Other operation
 
 ```js
 // check a cookie exist
-Cookies.isKey("token")
+cookies.isKey("token")
 
 // get a cookie
-Cookies.get("token")
+cookies.get("token")
 
 // remove a cookie
-Cookies.remove("token")
+cookies.remove("token")
 
 // get all cookie key names, line shows
-Cookies.keys().join("\n") 
+cookies.keys().join("\n") 
 ```
 
 ## Warning
