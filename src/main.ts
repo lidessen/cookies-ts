@@ -14,22 +14,22 @@ export interface Cookies {
     keys: () => string[];
 }
 
-const DEFAULT_CONFIG: CookiesOption = {
-    expires: "1d",
-    path: "; path=/"
-}
+export default class {
+    private DEFAULT_CONFIG: CookiesOption = {
+        expires: "1d",
+        path: "; path=/"
+    }
 
-export default {
     config(option: CookiesOption) {
         if (option.expires) {
-            DEFAULT_CONFIG.expires = option.expires;
+            this.DEFAULT_CONFIG.expires = option.expires;
         }
         if (option.path === "") {
-            DEFAULT_CONFIG.path = ""
+            this.DEFAULT_CONFIG.path = ""
         } else {
-            DEFAULT_CONFIG.path = "; path=" + option.path;
+            this.DEFAULT_CONFIG.path = "; path=" + option.path;
         }
-    },
+    }
 
     get(key: string) {
         let value = decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
@@ -42,7 +42,7 @@ export default {
             }
         }
         return value;
-    },
+    }
 
     set(key: string, value: any, option: CookiesOption = {}) {
         if (!key) {
@@ -57,7 +57,7 @@ export default {
         }
 
         let _expires = "; max-age=86400"; // temp value, default expire time for 1 day
-        let expires = option.expires || DEFAULT_CONFIG.expires;
+        let expires = option.expires || this.DEFAULT_CONFIG.expires;
         if (expires) {
             switch (expires.constructor) {
                 case Number:
@@ -88,21 +88,21 @@ export default {
                     break;
             }
         }
-        document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(value) + _expires + (option.domain ? "; domain=" + option.domain : "") + (option.path ? "; path=" + option.path : DEFAULT_CONFIG.path) + (option.secure ? "; secure" : "");
+        document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(value) + _expires + (option.domain ? "; domain=" + option.domain : "") + (option.path ? "; path=" + option.path : this.DEFAULT_CONFIG.path) + (option.secure ? "; secure" : "");
         return this;
-    },
+    }
 
     remove(key: string, option: CookiesOption = {}) {
         if (!key || !this.isKey(key)) {
             return false;
         }
-        document.cookie = encodeURIComponent(key) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (option.domain ? "; domain=" + option.domain : "") + (option.path ? "; path=" + option.path : DEFAULT_CONFIG.path);
+        document.cookie = encodeURIComponent(key) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (option.domain ? "; domain=" + option.domain : "") + (option.path ? "; path=" + option.path : this.DEFAULT_CONFIG.path);
         return this;
-    },
+    }
 
     isKey(key: string) {
         return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
-    },
+    }
 
     keys() {
         if (!document.cookie) return [];
