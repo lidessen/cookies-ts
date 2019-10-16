@@ -1,11 +1,11 @@
 {
   "name": "cookies-ts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A simple tool for handling browser cookies",
   "main": "lib/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,10 @@
   },
   "homepage": "https://github.com/ztytotoro/cookies-ts#readme",
   "devDependencies": {
+    "rollup": "^1.24.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.24.3",
+    "tslib": "^1.10.0",
     "typescript": "^3.6.4"
   }
 }
