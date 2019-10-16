@@ -5,8 +5,16 @@ export default [
   {
     input: 'src/main.ts',
     output: {
-      file: 'lib/main.js',
+      file: 'lib/main.common.js',
       format: 'cjs'
+    },
+    plugins: [typescript(), resolve()]
+  },
+  {
+    input: 'src/main.ts',
+    output: {
+      file: 'lib/main.esm.js',
+      format: 'esm'
     },
     plugins: [typescript(), resolve()]
   }

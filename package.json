@@ -1,8 +1,9 @@
 {
   "name": "cookies-ts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A simple tool for handling browser cookies",
-  "main": "lib/main.js",
+  "main": "lib/main.common.js",
+  "module": "lib/main.esm.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rollup -c"
